@@ -1,0 +1,79 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    _instanceof:
+        Ibexa\Contracts\AutomatedTranslation\Encoder\Field\FieldEncoderInterface:
+            tags: [ 'ibexa.automated_translation.field_encoder' ]
+
+        Ibexa\Contracts\AutomatedTranslation\Encoder\BlockAttribute\BlockAttributeEncoderInterface:
+            tags: [ 'ibexa.automated_translation.block_attribute_encoder' ]
+
+    # field encoder
+    Ibexa\AutomatedTranslation\Encoder\Field\TextLineFieldEncoder: ~
+
+    Ibexa\AutomatedTranslation\Encoder\Field\PageBuilderFieldEncoder:
+        arguments:
+            $blockAttributeEncoderManager: '@Ibexa\AutomatedTranslation\Encoder\BlockAttribute\BlockAttributeEncoderManager'
+            $blockDefinitionFactory: '@Ibexa\FieldTypePage\FieldType\Page\Block\Definition\BlockDefinitionFactory'
+
+    Ibexa\AutomatedTranslation\Encoder\Field\RichTextFieldEncoder:
+        arguments:
+            $richTextEncoder: '@Ibexa\AutomatedTranslation\Encoder\RichText\RichTextEncoder'
+
+    # field encoder manager
+    Ibexa\AutomatedTranslation\Encoder\Field\FieldEncoderManager:
+        arguments:
+            $fieldEncoders: !tagged_iterator 'ibexa.automated_translation.field_encoder'
+
+    # block attribute
+    Ibexa\AutomatedTranslation\Encoder\BlockAttribute\TextBlockAttributeEncoder: ~
+
+    Ibexa\AutomatedTranslation\Encoder\BlockAttribute\RichTextBlockAttributeEncoder:
+        arguments:
+            $richTextEncoder: '@Ibexa\AutomatedTranslation\Encoder\RichText\RichTextEncoder'
+
+    # block attribute encoder manager
+    Ibexa\AutomatedTranslation\Encoder\BlockAttribute\BlockAttributeEncoderManager:
+        arguments:
+            $blockAttributeEncoders: !tagged_iterator 'ibexa.automated_translation.block_attribute_encoder'
+
+    # RichText encoder
+    Ibexa\AutomatedTranslation\Encoder\RichText\RichTextEncoder:
+        arguments:
+            $configResolver: '@ibexa.config.resolver'
+
+    Ibexa\AutomatedTranslation\Encoder: ~
+
+    Ibexa\AutomatedTranslation\Translator: ~
+
+    Ibexa\AutomatedTranslation\TranslatorGuard: ~
+
+    Ibexa\AutomatedTranslation\Client\:
+        resource: '../../../lib/Client'
+        tags: ['ibexa.automated_translation.client']
+
+    Ibexa\AutomatedTranslation\ClientProvider:
+        arguments: [!tagged ibexa.automated_translation.client]
+
+    Ibexa\Bundle\AutomatedTranslation\Command\:
+        resource: '../../Command/*'
+        tags: ['console.command']
+
+    Ibexa\Bundle\AutomatedTranslation\Form\Extension\TranslationAddType:
+        tags:
+            - { name: form.type_extension, extended_type: Ibexa\AdminUi\Form\Type\Content\Translation\TranslationAddType }
+
+    Ibexa\Bundle\AutomatedTranslation\Form\Extension\ContentEditType:
+        tags:
+            - { name: form.type_extension, extended_type: Ibexa\ContentForms\Form\Type\Content\ContentEditType }
+
+    Ibexa\Bundle\AutomatedTranslation\Form\Extension\LanguageCreateType:
+        bind:
+            $localeList: '%ibexa.locale.conversion_map%'
+        tags:
+            - { name: form.type_extension, extended_type: Ibexa\AdminUi\Form\Type\Language\LanguageCreateType }
+
+    Ibexa\Bundle\AutomatedTranslation\EventListener\ContentProxyTranslateListener: ~

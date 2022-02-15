@@ -1,0 +1,9 @@
+services:
+
+    ibexa.automated_translate.adminui.component.javascripts:
+         parent: Ibexa\AdminUi\Component\TwigComponent
+         public: false
+         arguments:
+             $template: '@@IbexaAutomatedTranslation/adminui/javascripts.html.twig'
+         tags:
+             - { name: ibexa.admin_ui.component, group: 'script-body' }

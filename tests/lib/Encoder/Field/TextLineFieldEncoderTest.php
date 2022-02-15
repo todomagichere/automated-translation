@@ -1,21 +1,21 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAutomatedTranslation\Tests\Encoder\Field;
+namespace Ibexa\Tests\AutomatedTranslation\Encoder\Field;
 
-use eZ\Publish\API\Repository\Values\Content\Field;
-use eZ\Publish\Core\FieldType\TextLine;
-use EzSystems\EzPlatformAutomatedTranslation\Encoder\Field\TextLineFieldEncoder;
+use Ibexa\AutomatedTranslation\Encoder\Field\TextLineFieldEncoder;
+use Ibexa\Contracts\Core\Repository\Values\Content\Field;
+use Ibexa\Core\FieldType\TextLine;
 use PHPUnit\Framework\TestCase;
 
 class TextLineFieldEncoderTest extends TestCase
 {
-    public function testEncode()
+    public function testEncode(): void
     {
         $field = new Field([
             'fieldDefIdentifier' => 'field_1_textline',
@@ -28,7 +28,7 @@ class TextLineFieldEncoderTest extends TestCase
         $this->assertEquals('Some text 1', $result);
     }
 
-    public function testDecode()
+    public function testDecode(): void
     {
         $field = new Field([
             'fieldDefIdentifier' => 'field_1_textline',
@@ -42,3 +42,5 @@ class TextLineFieldEncoderTest extends TestCase
         $this->assertEquals(new TextLine\Value('Some text 1'), $result);
     }
 }
+
+class_alias(TextLineFieldEncoderTest::class, 'EzSystems\EzPlatformAutomatedTranslation\Tests\Encoder\Field\TextLineFieldEncoderTest');

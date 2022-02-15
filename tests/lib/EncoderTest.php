@@ -1,28 +1,28 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAutomatedTranslation\Tests;
+namespace Ibexa\Tests\AutomatedTranslation;
 
-use EzSystems\EzPlatformAutomatedTranslation\Encoder;
-use EzSystems\EzPlatformAutomatedTranslation\Encoder\Field\FieldEncoderManager;
+use Ibexa\AutomatedTranslation\Encoder;
+use Ibexa\AutomatedTranslation\Encoder\Field\FieldEncoderManager;
+use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
+use Ibexa\Contracts\Core\Repository\Values\Content\Field;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
+use Ibexa\Core\FieldType\TextLine;
+use Ibexa\Core\Repository\Values\Content\Content;
+use Ibexa\Core\Repository\Values\Content\VersionInfo;
 use PHPUnit\Framework\TestCase;
-use eZ\Publish\Core\Repository\Values\Content\Content;
-use eZ\Publish\Core\Repository\Values\Content\VersionInfo;
-use eZ\Publish\API\Repository\Values\Content\Field;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
-use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\Core\FieldType\TextLine;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class EncoderTest extends TestCase
 {
-    public function testEncodeWithoutFields()
+    public function testEncodeWithoutFields(): void
     {
         $contentTypeServiceMock = $this->getContentTypeServiceMock();
         $eventDispatcherMock = $this->getMockBuilder(EventDispatcherInterface::class)->getMock();
@@ -55,7 +55,7 @@ XML;
         $this->assertEquals($expected, $encodeResult);
     }
 
-    public function testEncodeTwoTextline()
+    public function testEncodeTwoTextline(): void
     {
         $contentTypeServiceMock = $this->getContentTypeServiceMock();
         $eventDispatcherMock = $this->getMockBuilder(EventDispatcherInterface::class)->getMock();
@@ -80,22 +80,16 @@ XML;
             ->getMockForAbstractClass();
 
         $contentType
-            ->expects($this->at(0))
+            ->expects($this->exactly(2))
             ->method('getFieldDefinition')
-            ->with('field_1_textline')
-            ->will($this->returnValue($fieldDefinition));
-
-        $contentType
-            ->expects($this->at(1))
-            ->method('getFieldDefinition')
-            ->with('field_2_textline')
-            ->will($this->returnValue($fieldDefinition));
+            ->withConsecutive(['field_1_textline'], ['field_2_textline'])
+            ->willReturnOnConsecutiveCalls($fieldDefinition, $fieldDefinition);
 
         $contentTypeServiceMock
             ->expects($this->once())
             ->method('loadContentType')
             ->with(123)
-            ->will($this->returnValue($contentType));
+            ->willReturn($contentType);
 
         $content = new Content([
             'versionInfo' => new VersionInfo([
@@ -130,11 +124,9 @@ XML;
 
         $encodeResult = $subject->encode($content);
 
-        $expectedEncodeResult = <<<XML
-<?xml version="1.0"?>
-<response><field_1_textline type="eZ\Publish\Core\FieldType\TextLine\Value">encoded</field_1_textline><field_2_textline type="eZ\Publish\Core\FieldType\TextLine\Value">encoded</field_2_textline></response>
-
-XML;
+        $expectedEncodeResult = '<?xml version="1.0"?>
+<response><field_1_textline type="Ibexa\\Core\\FieldType\\TextLine\\Value">encoded</field_1_textline><field_2_textline type="Ibexa\\Core\\FieldType\\TextLine\\Value">encoded</field_2_textline></response>
+';
 
         $this->assertEquals($expectedEncodeResult, $encodeResult);
     }
@@ -142,17 +134,19 @@ XML;
     /**
      * Returns ContentTypeService mock object.
      *
-     * @return \eZ\Publish\API\Repository\ContentTypeService|\PHPUnit_Framework_MockObject_MockObject
+     * @return \Ibexa\Contracts\Core\Repository\ContentTypeService|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getContentTypeServiceMock()
     {
         return $this
-            ->getMockBuilder('eZ\Publish\API\Repository\ContentTypeService')
+            ->getMockBuilder('Ibexa\\Contracts\\Core\\Repository\\ContentTypeService')
             ->getMock();
     }
 
-    protected function getFixture($name)
+    protected function getFixture(string $name): string
     {
-        return file_get_contents(__DIR__ . '/../fixtures/' . $name);
+        return (string) file_get_contents(__DIR__ . '/../fixtures/' . $name);
     }
 }
+
+class_alias(EncoderTest::class, 'EzSystems\EzPlatformAutomatedTranslation\Tests\EncoderTest');

@@ -1,23 +1,23 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAutomatedTranslation\Tests\Encoder\RichText;
+namespace Ibexa\Tests\AutomatedTranslation\Encoder\RichText;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformAutomatedTranslation\Encoder\RichText\RichTextEncoder;
+use Ibexa\AutomatedTranslation\Encoder\RichText\RichTextEncoder;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use PHPUnit\Framework\TestCase;
 
 class RichTextEncoderTest extends TestCase
 {
-    /** @var \PHPUnit_Framework_MockObject_MockObject|\eZ\Publish\Core\MVC\ConfigResolverInterface */
+    /** @var \PHPUnit\Framework\MockObject\MockObject|\Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
     private $configResolver;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -26,43 +26,18 @@ class RichTextEncoderTest extends TestCase
             ->getMock();
 
         $this->configResolver
-            ->expects($this->at(0))
+            ->expects($this->atLeastOnce())
             ->method('getParameter')
-            ->with(
-                $this->equalTo('non_translatable_tags'),
-                $this->equalTo('ez_platform_automated_translation')
+            ->withConsecutive(
+                [$this->equalTo('non_translatable_tags'), $this->equalTo('ibexa.automated_translation')],
+                [$this->equalTo('non_translatable_self_closed_tags'), $this->equalTo('ibexa.automated_translation')],
+                [$this->equalTo('non_translatable_characters'), $this->equalTo('ibexa.automated_translation')],
+                [$this->equalTo('non_valid_attribute_tags'), $this->equalTo('ibexa.automated_translation')]
             )
-            ->willReturn([]);
-
-        $this->configResolver
-            ->expects($this->at(1))
-            ->method('getParameter')
-            ->with(
-                $this->equalTo('non_translatable_self_closed_tags'),
-                $this->equalTo('ez_platform_automated_translation')
-            )
-            ->willReturn([]);
-
-        $this->configResolver
-            ->expects($this->at(2))
-            ->method('getParameter')
-            ->with(
-                $this->equalTo('non_translatable_characters'),
-                $this->equalTo('ez_platform_automated_translation')
-            )
-            ->willReturn([]);
-
-        $this->configResolver
-            ->expects($this->at(3))
-            ->method('getParameter')
-            ->with(
-                $this->equalTo('non_valid_attribute_tags'),
-                $this->equalTo('ez_platform_automated_translation')
-            )
-            ->willReturn([]);
+            ->willReturnOnConsecutiveCalls([], [], [], []);
     }
 
-    public function testEncodeAndDecodeRichtext()
+    public function testEncodeAndDecodeRichtext(): void
     {
         $xml1 = $this->getFixture('testEncodeTwoRichText_field1_richtext.xml');
 
@@ -79,7 +54,7 @@ class RichTextEncoderTest extends TestCase
         $this->assertEquals($xml1, $decodeResult);
     }
 
-    public function testEncodeAndDecodeRichtextEmbeded()
+    public function testEncodeAndDecodeRichtextEmbeded(): void
     {
         $xml1 = $this->getFixture('testEncodeTwoRichTextWithTwoEzembed_field2_richtext.xml');
 
@@ -96,7 +71,7 @@ class RichTextEncoderTest extends TestCase
         $this->assertEquals($xml1, $decodeResult);
     }
 
-    public function testEncodeAndDecodeRichtextExtended()
+    public function testEncodeAndDecodeRichtextExtended(): void
     {
         $xml1 = $this->getFixture('testEncodeRichText_input.xml');
 
@@ -115,8 +90,10 @@ class RichTextEncoderTest extends TestCase
         $this->assertEquals($xml1, $decodeResult);
     }
 
-    protected function getFixture($name)
+    protected function getFixture(string $name): string
     {
-        return file_get_contents(__DIR__ . '/../../../fixtures/' . $name);
+        return (string) file_get_contents(__DIR__ . '/../../../fixtures/' . $name);
     }
 }
+
+class_alias(RichTextEncoderTest::class, 'EzSystems\EzPlatformAutomatedTranslation\Tests\Encoder\RichText\RichTextEncoderTest');

@@ -1,15 +1,15 @@
 {
-    "name": "ezsystems/ezplatform-automated-translation",
-    "description": "eZ Platform Automated Translation Bundle provides interfaces to automatically translate a new content translation from different translation providers.",
+    "name": "ibexa/automated-translation",
+    "description": "Ibexa Automated Translation Bundle provides interfaces to automatically translate a new content translation from different translation providers.",
     "keywords": [
         "novactive",
-        "ezplatform",
+        "ibexa",
         "translation",
         "deepl",
         "googletranslate"
     ],
-    "homepage": "https://github.com/ezsystems/ezplatform-automated-translation",
-    "type": "ezplatform-bundle",
+    "homepage": "https://github.com/ibexa/automated-translation",
+    "type": "ibexa-bundle",
     "authors": [
         {
             "name": "Novactive",
@@ -17,11 +17,9 @@
             "email": "s.morel@novactive.com"
         }
     ],
-    "license": [
-        "GPL-2.0"
-    ],
+    "license": "(GPL-2.0-only or proprietary)",
     "require": {
-        "php": "^7.3",
+        "php": "^7.4 || ^8.0",
         "ext-libxml": "*",
         "symfony/yaml": "^5.0",
         "symfony/routing": "^5.0",
@@ -30,34 +28,61 @@
         "symfony/http-foundation": "^5.0",
         "symfony/event-dispatcher": "^5.0",
         "guzzlehttp/guzzle": "^6.3.0",
-        "ezsystems/ezplatform-kernel": "^1.2",
-        "ezsystems/ezplatform-richtext": "^2.0",
-        "ezsystems/ezplatform-admin-ui": "^2.2"
+        "ibexa/core": "^4.0@dev",
+        "ibexa/fieldtype-richtext": "^4.0@dev",
+        "ibexa/admin-ui": "^4.0@dev"
     },
     "require-dev": {
-        "squizlabs/php_codesniffer": "^3.2",
-        "phpmd/phpmd": "^2.6",
-        "friendsofphp/php-cs-fixer": "^2.10",
-        "phpunit/phpunit": "^6.4",
-        "ezsystems/ezplatform-code-style": "^0.1.0",
-        "dg/bypass-finals": "^1.3"
+        "dg/bypass-finals": "^1.3",
+        "phpunit/phpunit": "^9.5",
+        "ibexa/code-style": "^1.0",
+        "friendsofphp/php-cs-fixer": "^3.0",
+        "phpstan/phpstan": "^1.2",
+        "phpstan/phpstan-phpunit": "^1.0",
+        "phpstan/phpstan-symfony": "^1.0"
     },
     "autoload": {
         "psr-4": {
             "EzSystems\\EzPlatformAutomatedTranslation\\": "lib",
             "EzSystems\\EzPlatformAutomatedTranslationBundle\\": "bundle",
-            "EzSystems\\EzPlatformAutomatedTranslationBundle\\Tests\\": "tests"
+            "Ibexa\\AutomatedTranslation\\": "src/lib/",
+            "Ibexa\\Bundle\\AutomatedTranslation\\": "src/bundle/",
+            "Ibexa\\Contracts\\AutomatedTranslation\\": "src/contracts/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "EzSystems\\EzPlatformAutomatedTranslation\\Tests\\": "tests/lib/",
-            "EzSystems\\EzPlatformAutomatedTranslationBundle\\Tests\\": "tests/bundle/"
+            "EzSystems\\EzPlatformAutomatedTranslationBundle\\Tests\\": "tests/bundle/",
+            "Ibexa\\Tests\\AutomatedTranslation\\": "tests/lib/",
+            "Ibexa\\Tests\\Bundle\\AutomatedTranslation\\": "tests/bundle/"
+        }
+    },
+    "scripts": {
+        "fix-cs": "php-cs-fixer fix -v --config=.php-cs-fixer.php --show-progress=dots",
+        "fix-cs-changed": "@fix-cs $(git diff ${GIT_DIFF_BASE:-origin/main} --diff-filter=ACMR --name-only \"*.php\"|paste -sd ' ')",
+        "test": "phpunit -c phpunit.xml.dist",
+        "phpstan": "phpstan analyse -c phpstan.neon",
+        "check-cs-changed": "@fix-cs-changed --dry-run",
+        "check-cs": "@fix-cs --dry-run"
+    },
+    "scripts-descriptions": {
+        "fix-cs": "Automatically fixes code style in all files",
+        "fix-cs-changed": "Automatically fixes code style in changed files only, compared to branch in GIT_DIFF_BASE env variable, defaults to origin/main",
+        "test": "Run automatic tests",
+        "phpstan": "Run static code analysis",
+        "check-cs-changed": "Run code style checker against changed files only, compared to branch in GIT_DIFF_BASE env variable, defaults to origin/main",
+        "check-cs": "Run code style checker for all files"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true
         }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.2.x-dev"
+            "dev-main": "4.0.x-dev"
         }
     }
 }

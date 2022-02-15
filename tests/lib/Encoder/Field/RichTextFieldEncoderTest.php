@@ -1,22 +1,22 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformAutomatedTranslation\Tests\Encoder\Field;
+namespace Ibexa\Tests\AutomatedTranslation\Encoder\Field;
 
-use eZ\Publish\API\Repository\Values\Content\Field;
-use EzSystems\EzPlatformAutomatedTranslation\Encoder\Field\RichTextFieldEncoder;
-use EzSystems\EzPlatformAutomatedTranslation\Encoder\RichText\RichTextEncoder;
-use EzSystems\EzPlatformRichText\eZ\FieldType\RichText;
+use Ibexa\AutomatedTranslation\Encoder\Field\RichTextFieldEncoder;
+use Ibexa\AutomatedTranslation\Encoder\RichText\RichTextEncoder;
+use Ibexa\Contracts\Core\Repository\Values\Content\Field;
+use Ibexa\FieldTypeRichText\FieldType\RichText;
 use PHPUnit\Framework\TestCase;
 
 class RichTextFieldEncoderTest extends TestCase
 {
-    public function testEncode()
+    public function testEncode(): void
     {
         $richTextEncoderMock = $this->getMockBuilder(RichTextEncoder::class)
             ->disableOriginalConstructor()
@@ -41,7 +41,7 @@ class RichTextFieldEncoderTest extends TestCase
         $this->assertEquals('Some text 1', $result);
     }
 
-    public function testDecode()
+    public function testDecode(): void
     {
         $xml1 = $this->getFixture('testEncodeTwoRichText_field1_richtext.xml');
 
@@ -70,8 +70,10 @@ class RichTextFieldEncoderTest extends TestCase
         $this->assertEquals(new RichText\Value($xml1), $result);
     }
 
-    protected function getFixture($name)
+    protected function getFixture(string $name): string
     {
-        return file_get_contents(__DIR__ . '/../../../fixtures/' . $name);
+        return (string) file_get_contents(__DIR__ . '/../../../fixtures/' . $name);
     }
 }
+
+class_alias(RichTextFieldEncoderTest::class, 'EzSystems\EzPlatformAutomatedTranslation\Tests\Encoder\Field\RichTextFieldEncoderTest');
