@@ -25,6 +25,9 @@ class IbexaAutomatedTranslationExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
+        if (empty($config['system'])) {
+            return;
+        }
 
         if (empty($config['system'])) {
             return;
@@ -39,7 +42,6 @@ class IbexaAutomatedTranslationExtension extends Extension
 
         $container->registerForAutoconfiguration(BlockAttributeEncoderInterface::class)
             ->addTag('ibexa.automated_translation.block_attribute_encoder');
-
         if (!$this->hasConfiguredClients($config, $container)) {
             return;
         }
