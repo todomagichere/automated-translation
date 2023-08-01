@@ -8,28 +8,26 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\AutomatedTranslation\Encoder\Field;
 
-use eZ\Publish\API\Repository\Values\Content\Field;
-use EzSystems\EzPlatformAutomatedTranslation\Encoder\BlockAttribute\BlockAttributeEncoderManager;
-use EzSystems\EzPlatformAutomatedTranslation\Encoder\Field\PageBuilderFieldEncoder;
-use EzSystems\EzPlatformPageFieldType\FieldType\LandingPage\Model\Attribute;
-use EzSystems\EzPlatformPageFieldType\FieldType\LandingPage\Model\BlockValue;
-use EzSystems\EzPlatformPageFieldType\FieldType\LandingPage\Model\Page;
-use EzSystems\EzPlatformPageFieldType\FieldType\LandingPage\Model\Zone;
-use EzSystems\EzPlatformPageFieldType\FieldType\LandingPage\Value;
-use EzSystems\EzPlatformPageFieldType\FieldType\Page\Block\Definition\BlockAttributeDefinition;
-use EzSystems\EzPlatformPageFieldType\FieldType\Page\Block\Definition\BlockDefinition;
-use EzSystems\EzPlatformPageFieldType\FieldType\Page\Block\Definition\BlockDefinitionFactory;
+use Ibexa\Contracts\Core\Repository\Values\Content\Field;
+use Ibexa\AutomatedTranslation\Encoder\BlockAttribute\BlockAttributeEncoderManager;
+use Ibexa\AutomatedTranslation\Encoder\Field\PageBuilderFieldEncoder;
+use Ibexa\Contracts\FieldTypePage\FieldType\LandingPage\Model\Attribute;
+use Ibexa\Contracts\FieldTypePage\FieldType\LandingPage\Model\BlockValue;
+use Ibexa\Contracts\FieldTypePage\FieldType\LandingPage\Model\Page;
+use Ibexa\Contracts\FieldTypePage\FieldType\LandingPage\Model\Zone;
+use Ibexa\Contracts\FieldTypePage\FieldType\LandingPage\Value;
+use Ibexa\Contracts\FieldTypePage\FieldType\Page\Block\Definition\BlockAttributeDefinition;
+use Ibexa\Contracts\FieldTypePage\FieldType\Page\Block\Definition\BlockDefinition;
+use Ibexa\Contracts\FieldTypePage\FieldType\Page\Block\Definition\BlockDefinitionFactory;
 use PHPUnit\Framework\TestCase;
 
 final class PageBuilderFieldEncoderTest extends TestCase
 {
     public const ATTRIBUTE_VALUE = 'ibexa';
 
-    /** @var \EzSystems\EzPlatformAutomatedTranslation\Encoder\BlockAttribute\BlockAttributeEncoderManager */
-    private $blockAttributeEncoderManagerMock;
+    private BlockAttributeEncoderManager $blockAttributeEncoderManagerMock;
 
-    /** @var \EzSystems\EzPlatformPageFieldType\FieldType\Page\Block\Definition\BlockDefinitionFactory */
-    private $blockDefinitionFactoryMock;
+    private BlockDefinitionFactory $blockDefinitionFactoryMock;
 
     public function setUp(): void {
         $this->blockAttributeEncoderManagerMock = $this->createMock(BlockAttributeEncoderManager::class);
