@@ -163,7 +163,7 @@ class Encoder
                 ));
             }
 
-            if (get_class($fieldValue) !== $type) {
+            if (!is_a($type, get_class($fieldValue), true)) {
                 throw new InvalidArgumentException(sprintf(
                     'Decoded field class mismatch: expected %s, actual: %s',
                     $type,
