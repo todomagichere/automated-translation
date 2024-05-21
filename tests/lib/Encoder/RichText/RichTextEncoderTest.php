@@ -95,5 +95,3 @@ class RichTextEncoderTest extends TestCase
         return (string) file_get_contents(__DIR__ . '/../../../fixtures/' . $name);
     }
 }
-
-class_alias(RichTextEncoderTest::class, 'EzSystems\EzPlatformAutomatedTranslation\Tests\Encoder\RichText\RichTextEncoderTest');
