@@ -59,17 +59,13 @@
         "psr-4": {
             "Ibexa\\AutomatedTranslation\\": "src/lib/",
             "Ibexa\\Bundle\\AutomatedTranslation\\": "src/bundle/",
-            "Ibexa\\Contracts\\AutomatedTranslation\\": "src/contracts/",
-            "EzSystems\\EzPlatformAutomatedTranslation\\": "src/lib/",
-            "EzSystems\\EzPlatformAutomatedTranslationBundle\\": "src/bundle/"
+            "Ibexa\\Contracts\\AutomatedTranslation\\": "src/contracts/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Ibexa\\Tests\\AutomatedTranslation\\": "tests/lib/",
-            "Ibexa\\Tests\\Bundle\\AutomatedTranslation\\": "tests/bundle/",
-            "EzSystems\\EzPlatformAutomatedTranslation\\Tests\\": "tests/lib/",
-            "EzSystems\\EzPlatformAutomatedTranslationBundle\\Tests\\": "tests/bundle/"
+            "Ibexa\\Tests\\Bundle\\AutomatedTranslation\\": "tests/bundle/"
         }
     },
     "scripts": {
