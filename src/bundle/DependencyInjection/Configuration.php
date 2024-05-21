@@ -27,5 +27,3 @@ class Configuration extends SiteAccessAware\Configuration
         return $treeBuilder;
     }
 }
-
-class_alias(Configuration::class, 'EzSystems\EzPlatformAutomatedTranslationBundle\DependencyInjection\Configuration');

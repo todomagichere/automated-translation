@@ -47,5 +47,3 @@ class LanguageCreateType extends AbstractTypeExtension
         );
     }
 }
-
-class_alias(LanguageCreateType::class, 'EzSystems\EzPlatformAutomatedTranslationBundle\Form\Extension\LanguageCreateType');

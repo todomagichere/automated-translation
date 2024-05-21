@@ -23,5 +23,3 @@ class IbexaAutomatedTranslationBundle extends Bundle
         parent::build($container);
     }
 }
-
-class_alias(IbexaAutomatedTranslationBundle::class, 'EzSystems\EzPlatformAutomatedTranslationBundle\EzPlatformAutomatedTranslationBundle');

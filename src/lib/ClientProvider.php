@@ -66,5 +66,3 @@ class ClientProvider
         return $this->clients;
     }
 }
-
-class_alias(ClientProvider::class, 'EzSystems\EzPlatformAutomatedTranslation\ClientProvider');

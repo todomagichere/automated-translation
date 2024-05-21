@@ -20,5 +20,3 @@ final class Events
      */
     public const POST_FIELD_DECODE = 'ibexa.automated_translation.post_field_decode';
 }
-
-class_alias(Events::class, 'EzSystems\EzPlatformAutomatedTranslationBundle\Events');

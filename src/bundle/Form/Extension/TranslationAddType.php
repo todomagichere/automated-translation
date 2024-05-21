@@ -133,5 +133,3 @@ class TranslationAddType extends AbstractTypeExtension
         $resolver->setDefaults([]);
     }
 }
-
-class_alias(TranslationAddType::class, 'EzSystems\EzPlatformAutomatedTranslationBundle\Form\Extension\TranslationAddType');

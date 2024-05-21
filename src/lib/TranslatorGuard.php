@@ -77,5 +77,3 @@ class TranslatorGuard
         return $this->contentService->loadContentByContentInfo($content->contentInfo, [$languageCode]);
     }
 }
-
-class_alias(TranslatorGuard::class, 'EzSystems\EzPlatformAutomatedTranslation\TranslatorGuard');

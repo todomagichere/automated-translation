@@ -90,5 +90,3 @@ class ContentProxyTranslateListener implements EventSubscriberInterface
         $event->setResponse($response);
     }
 }
-
-class_alias(ContentProxyTranslateListener::class, 'EzSystems\EzPlatformAutomatedTranslationBundle\EventListener\ContentProxyTranslateListener');

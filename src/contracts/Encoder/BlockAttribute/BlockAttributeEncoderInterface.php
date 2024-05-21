@@ -21,5 +21,3 @@ interface BlockAttributeEncoderInterface
 
     public function decode(string $value): string;
 }
-
-class_alias(BlockAttributeEncoderInterface::class, 'EzSystems\EzPlatformAutomatedTranslation\Encoder\BlockAttribute\BlockAttributeEncoderInterface');

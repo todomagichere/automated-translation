@@ -33,5 +33,3 @@ class TranslationAddDataTransformer implements DataTransformerInterface
         return $value;
     }
 }
-
-class_alias(TranslationAddDataTransformer::class, 'EzSystems\EzPlatformAutomatedTranslationBundle\Form\TranslationAddDataTransformer');

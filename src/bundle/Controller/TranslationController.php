@@ -92,5 +92,3 @@ final class TranslationController extends Controller
         return 1 === preg_match("#{$pattern}#", $targetUrl);
     }
 }
-
-class_alias(TranslationController::class, 'EzSystems\EzPlatformAutomatedTranslationBundle\Controller\TranslationController');

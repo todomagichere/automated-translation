@@ -94,5 +94,3 @@ class IbexaAutomatedTranslationExtension extends Extension implements PrependExt
         ]);
     }
 }
-
-class_alias(IbexaAutomatedTranslationExtension::class, 'EzSystems\EzPlatformAutomatedTranslationBundle\DependencyInjection\EzPlatformAutomatedTranslationExtension');
