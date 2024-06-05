@@ -148,5 +148,3 @@ XML;
         return (string) file_get_contents(__DIR__ . '/../fixtures/' . $name);
     }
 }
-
-class_alias(EncoderTest::class, 'EzSystems\EzPlatformAutomatedTranslation\Tests\EncoderTest');

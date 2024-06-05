@@ -208,5 +208,3 @@ final class RichTextEncoder
         );
     }
 }
-
-class_alias(RichTextEncoder::class, 'EzSystems\EzPlatformAutomatedTranslation\Encoder\RichText\RichTextEncoder');

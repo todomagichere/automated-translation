@@ -42,5 +42,3 @@ final class TextLineFieldEncoder implements FieldEncoderInterface
         return new TextLineValue($value);
     }
 }
-
-class_alias(TextLineFieldEncoder::class, 'EzSystems\EzPlatformAutomatedTranslation\Encoder\Field\TextLineFieldEncoder');

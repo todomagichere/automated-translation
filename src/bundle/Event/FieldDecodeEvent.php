@@ -70,5 +70,3 @@ final class FieldDecodeEvent
         $this->previousValue = $previousValue;
     }
 }
-
-class_alias(FieldDecodeEvent::class, 'EzSystems\EzPlatformAutomatedTranslationBundle\Event\FieldDecodeEvent');

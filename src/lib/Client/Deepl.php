@@ -90,5 +90,3 @@ class Deepl implements ClientInterface
      */
     private const LANGUAGE_CODES = ['EN', 'DE', 'FR', 'ES', 'IT', 'NL', 'PL'];
 }
-
-class_alias(Deepl::class, 'EzSystems\EzPlatformAutomatedTranslation\Client\Deepl');

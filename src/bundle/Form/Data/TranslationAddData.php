@@ -27,5 +27,3 @@ class TranslationAddData extends BaseTranslationAddData
         $this->translatorAlias = $translatorAlias;
     }
 }
-
-class_alias(TranslationAddData::class, 'EzSystems\EzPlatformAutomatedTranslationBundle\Form\Data\TranslationAddData');

@@ -61,5 +61,3 @@ final class BlockAttributeEncoderManager
         );
     }
 }
-
-class_alias(BlockAttributeEncoderManager::class, 'EzSystems\EzPlatformAutomatedTranslation\Encoder\BlockAttribute\BlockAttributeEncoderManager');

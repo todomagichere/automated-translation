@@ -51,5 +51,3 @@ final class RichTextFieldEncoder implements FieldEncoderInterface
         return new RichTextValue($decodedValue);
     }
 }
-
-class_alias(RichTextFieldEncoder::class, 'EzSystems\EzPlatformAutomatedTranslation\Encoder\Field\RichTextFieldEncoder');

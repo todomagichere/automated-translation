@@ -63,5 +63,3 @@ final class FieldEncoderManager
         );
     }
 }
-
-class_alias(FieldEncoderManager::class, 'EzSystems\EzPlatformAutomatedTranslation\Encoder\Field\FieldEncoderManager');

@@ -29,5 +29,3 @@ interface ClientInterface
      */
     public function getServiceFullName(): string;
 }
-
-class_alias(ClientInterface::class, 'EzSystems\EzPlatformAutomatedTranslation\Client\ClientInterface');

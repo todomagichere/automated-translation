@@ -150,5 +150,3 @@ final class PageBuilderFieldEncoder implements FieldEncoderInterface
         return $value;
     }
 }
-
-class_alias(PageBuilderFieldEncoder::class, 'EzSystems\EzPlatformAutomatedTranslation\Encoder\Field\PageBuilderFieldEncoder');

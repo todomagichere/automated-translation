@@ -46,5 +46,3 @@ final class FieldEncodeEvent
         $this->value = $value;
     }
 }
-
-class_alias(FieldEncodeEvent::class, 'EzSystems\EzPlatformAutomatedTranslationBundle\Event\FieldEncodeEvent');

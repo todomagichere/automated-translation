@@ -17,5 +17,3 @@ class InvalidLanguageCodeException extends InvalidArgumentException
         parent::__construct("$languageCode not recognized by $driver");
     }
 }
-
-class_alias(InvalidLanguageCodeException::class, 'EzSystems\EzPlatformAutomatedTranslation\Exception\InvalidLanguageCodeException');

@@ -90,5 +90,3 @@ final class TranslateContentCommand extends Command
         );
     }
 }
-
-class_alias(TranslateContentCommand::class, 'EzSystems\EzPlatformAutomatedTranslationBundle\Command\TranslateContentCommand');

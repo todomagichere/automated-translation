@@ -92,5 +92,3 @@ class IbexaAutomatedTranslationExtensionTest extends TestCase
         $this->assertEquals($expected, $hasConfiguredClientsResult);
     }
 }
-
-class_alias(IbexaAutomatedTranslationExtensionTest::class, 'EzSystems\EzPlatformAutomatedTranslationBundle\Tests\DependencyInjection\EzPlatformAutomatedTranslationExtensionTest');

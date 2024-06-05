@@ -34,5 +34,3 @@ final class TextBlockAttributeEncoder implements BlockAttributeEncoderInterface
         return $value;
     }
 }
-
-class_alias(TextBlockAttributeEncoder::class, 'EzSystems\EzPlatformAutomatedTranslation\Encoder\BlockAttribute\TextBlockAttributeEncoder');

@@ -208,5 +208,3 @@ class Encoder
         return $event->getValue();
     }
 }
-
-class_alias(Encoder::class, 'EzSystems\EzPlatformAutomatedTranslation\Encoder');

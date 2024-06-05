@@ -121,5 +121,3 @@ class Google implements ClientInterface, LoggerAwareInterface
         throw new InvalidLanguageCodeException($languageCode, $this->getServiceAlias());
     }
 }
-
-class_alias(Google::class, 'EzSystems\EzPlatformAutomatedTranslation\Client\Google');

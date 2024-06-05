@@ -90,5 +90,3 @@ class Translator
         return $this->contentService->updateContent($contentDraft->versionInfo, $contentUpdateStruct);
     }
 }
-
-class_alias(Translator::class, 'EzSystems\EzPlatformAutomatedTranslation\Translator');

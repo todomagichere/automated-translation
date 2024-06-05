@@ -50,5 +50,3 @@ final class RichTextBlockAttributeEncoder implements BlockAttributeEncoderInterf
         return $decodedValue;
     }
 }
-
-class_alias(RichTextBlockAttributeEncoder::class, 'EzSystems\EzPlatformAutomatedTranslation\Encoder\BlockAttribute\RichTextBlockAttributeEncoder');

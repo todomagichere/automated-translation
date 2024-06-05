@@ -42,5 +42,3 @@ class TextLineFieldEncoderTest extends TestCase
         $this->assertEquals(new TextLine\Value('Some text 1'), $result);
     }
 }
-
-class_alias(TextLineFieldEncoderTest::class, 'EzSystems\EzPlatformAutomatedTranslation\Tests\Encoder\Field\TextLineFieldEncoderTest');
