@@ -15,6 +15,15 @@ use Ibexa\Contracts\AutomatedTranslation\Client\ClientInterface;
 
 class Deepl implements ClientInterface
 {
+    /**
+     * List of available code https://developers.deepl.com/docs/resources/supported-languages.
+     */
+    private const LANGUAGE_CODES = [
+        'AR', 'BG', 'CS', 'DA', 'DE', 'EL', 'EN-GB', 'EN-US', 'ES', 'ET', 'FI', 'FR',
+        'HU', 'ID', 'IT', 'JA', 'KO', 'LT', 'LV', 'NB', 'NL', 'PL', 'PT-BR', 'PT-PT', 'RO',
+        'RU', 'SK', 'SL', 'SV', 'TR', 'UK', 'ZH-HANS', 'ZH-HANT',
+    ];
+
     private string $authKey;
 
     public function getServiceAlias(): string
@@ -49,7 +58,7 @@ class Deepl implements ClientInterface
 
         if (null !== $from) {
             $parameters += [
-                'source_lang' => $this->normalized($from),
+                'source_lang' => substr($this->normalized($from), 0, 2),
             ];
         }
 
@@ -59,7 +68,7 @@ class Deepl implements ClientInterface
                 'timeout' => 5.0,
             ]
         );
-        $response = $http->post('/v1/translate', ['form_params' => $parameters]);
+        $response = $http->post('/v2/translate', ['form_params' => $parameters]);
         // May use the native json method from guzzle
         $json = json_decode($response->getBody()->getContents());
 
@@ -82,13 +91,32 @@ class Deepl implements ClientInterface
             return $code;
         }
 
+        if ('zh_TW' === $languageCode) {
+            return 'ZH-HANT';
+        }
+
+        if ('zh_CN' === $languageCode || 'zh_HK' === $languageCode || $code === 'ZH') {
+            return 'ZH-HANS';
+        }
+
+        if ('en_GB' === $languageCode) {
+            return 'EN-GB';
+        }
+
+        if ('EN' === $code) {
+            return 'EN-US';
+        }
+
+        if ('pt_BR' === $languageCode) {
+            return 'PT-BR';
+        }
+
+        if ('PT' === $code) {
+            return 'PT-PT';
+        }
+
         throw new InvalidLanguageCodeException($languageCode, $this->getServiceAlias());
     }
-
-    /**
-     * List of available code https://www.deepl.com/api.html.
-     */
-    private const LANGUAGE_CODES = ['EN', 'DE', 'FR', 'ES', 'IT', 'NL', 'PL'];
 }
 
 class_alias(Deepl::class, 'EzSystems\EzPlatformAutomatedTranslation\Client\Deepl');
