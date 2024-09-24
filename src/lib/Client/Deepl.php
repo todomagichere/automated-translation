@@ -16,7 +16,7 @@ use Ibexa\Contracts\AutomatedTranslation\Client\ClientInterface;
 class Deepl implements ClientInterface
 {
     /**
-     * List of available code https://developers.deepl.com/docs/resources/supported-languages.
+     * List of available codes https://developers.deepl.com/docs/resources/supported-languages.
      */
     private const LANGUAGE_CODES = [
         'AR', 'BG', 'CS', 'DA', 'DE', 'EL', 'EN-GB', 'EN-US', 'ES', 'ET', 'FI', 'FR',
@@ -27,12 +27,12 @@ class Deepl implements ClientInterface
     private string $authKey;
 
     /**
-     * @param string[] $languageMap
+     * @param array<string, string> $languageMap
      */
     private array $languageMap;
 
     /**
-     * @param string[] $languageMap
+     * @param array<string, string> $languageMap
      */
     public function __construct(array $languageMap)
     {
