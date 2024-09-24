@@ -26,6 +26,19 @@ class Deepl implements ClientInterface
 
     private string $authKey;
 
+    /**
+     * @param string[] $languageMap
+     */
+    private array $languageMap;
+
+    /**
+     * @param string[] $languageMap
+     */
+    public function __construct(array $languageMap)
+    {
+        $this->languageMap = $languageMap;
+    }
+
     public function getServiceAlias(): string
     {
         return 'deepl';
@@ -91,28 +104,14 @@ class Deepl implements ClientInterface
             return $code;
         }
 
-        if ('zh_TW' === $languageCode) {
-            return 'ZH-HANT';
+        $languageCode = strtoupper($languageCode);
+
+        if (isset($this->languageMap[$languageCode])) {
+            return $this->languageMap[$languageCode];
         }
 
-        if ('zh_CN' === $languageCode || 'zh_HK' === $languageCode || $code === 'ZH') {
-            return 'ZH-HANS';
-        }
-
-        if ('en_GB' === $languageCode) {
-            return 'EN-GB';
-        }
-
-        if ('EN' === $code) {
-            return 'EN-US';
-        }
-
-        if ('pt_BR' === $languageCode) {
-            return 'PT-BR';
-        }
-
-        if ('PT' === $code) {
-            return 'PT-PT';
+        if (isset($this->languageMap[$code])) {
+            return $this->languageMap[$code];
         }
 
         throw new InvalidLanguageCodeException($languageCode, $this->getServiceAlias());
