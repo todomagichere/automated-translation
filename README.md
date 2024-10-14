@@ -20,3 +20,21 @@ AND
 B - GNU General Public License, version 2
 Grants an copyleft open source license with ABSOLUTELY NO WARRANTY. For the full GPL license text, please see:
 https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+
+
+# Usage
+
+> All the configuration is SiteAccessAware then you can have different one depending on the SiteAccess
+
+## Basic Configuration
+
+```yaml
+# app/config/config.yml
+ibexa_automated_translation:
+    system:
+        default:
+            configurations:
+                google:
+                    apiKey: "google-api-key"
+                deepl:
+                    authKey: "deepl-pro-key"
